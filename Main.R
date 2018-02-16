@@ -1,0 +1,12 @@
+set.seed(123)
+library("dplyr")
+library("LiblineaR")
+library("e1071")
+source("data_understanding.R")
+source("data_preparation.R")
+source("data_splitting.R")
+source("data_normalization.R")
+
+fullSet <- read.csv("training_R.csv",row.names=1, sep=";")
+
+data_summary <- data_understanding(fullSet);
