@@ -10,3 +10,5 @@ source("data_normalization.R")
 fullSet <- read.csv("training_R.csv",row.names=1, sep=";")
 
 data_summary <- data_understanding(fullSet);
+my_data <- data_preparation(fullSet);
+data_summary <- data_understanding(my_data);

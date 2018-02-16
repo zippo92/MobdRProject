@@ -1,5 +1,3 @@
-print("CIAO! Data Understanding");
-
 data_understanding <- function(my_data){
 
   type_attribute <- lapply(my_data, class);
