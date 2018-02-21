@@ -26,6 +26,13 @@ data_preparation <- function(my_data){
   # Replace outliers
   my_data <- search_and_replace_outlier(my_data);
   
+  # 1)Tentativo LDA - Lo rende binario (se maggiore di 0.3, = 1 altrimenti 0)
+  #my_data <- convert_LDA(my_data); 
+  
+  # 2)Tentativo LDA - Lo rende binario (se maggiore di 0.3, = 1 altrimenti 0)
+  #my_data <- convert_LDA2(my_data);
+  
+  
   return(my_data);
 }
 
@@ -57,5 +64,20 @@ search_and_replace_outlier <- function(my_data){
   my_data$num_hrefs <- replace_outlier(my_data$num_hrefs);
   my_data$num_videos <- replace_outlier(my_data$num_videos);
   
+  return(my_data);
+}
+convert_LDA <- function(my_data){
+  my_data$LDA_00 <- ifelse(my_data$LDA_00 > 0.3, 1, 0);
+  my_data$LDA_01 <- ifelse(my_data$LDA_01 > 0.3, 1, 0);
+  my_data$LDA_02 <- ifelse(my_data$LDA_02 > 0.3, 1, 0);
+  my_data$LDA_03 <- ifelse(my_data$LDA_03 > 0.3, 1, 0);
+  my_data$LDA_04 <- ifelse(my_data$LDA_04 > 0.3, 1, 0);
+  return(my_data);
+}
+
+convert_LDA2 <- function(my_data){
+
+  my_data[,24:28] <- apply(my_data[,24:28],1,function(x) 
+           (ifelse(x==max(x),1,0)))
   return(my_data);
 }
