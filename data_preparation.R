@@ -30,7 +30,7 @@ data_preparation <- function(my_data){
   #my_data <- convert_LDA(my_data); 
   
   # 2)Tentativo LDA - Lo rende binario (se maggiore di 0.3, = 1 altrimenti 0)
-  #my_data <- convert_LDA2(my_data);
+  my_data <- convert_LDA2(my_data);
   
   
   return(my_data);
@@ -75,9 +75,28 @@ convert_LDA <- function(my_data){
   return(my_data);
 }
 
-convert_LDA2 <- function(my_data){
+pippo <- function(data)
+{
+  strongest <- which.max(data) 
+  vec = vector(,5);
+  for(i in 1:5)
+  {
+    
+    if(i==strongest)
+    {
+        vec[i] <- 1;
+    }
+    else
+    {
+       vec[i] <- 0; 
+    }
+  }
+  print(vec);
+  return(t(vec)); 
+  }
 
-  my_data[,24:28] <- apply(my_data[,24:28],1,function(x) 
-           (ifelse(x==max(x),1,0)))
+convert_LDA2 <- function(my_data){
+ 
+  my_data[,24:28] <- t(apply(my_data[,24:28],1,pippo));
   return(my_data);
 }
