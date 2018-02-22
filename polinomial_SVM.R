@@ -6,7 +6,7 @@
 polinomial_SVM <- function(TR,YTR,TS,YTS){
   set.seed(123)
   #addestramento
-  polinomial_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="polynomial") #
+  polinomial_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="polynomial",cost=0.01) #
   #predizione sui dati di test
   test_prediction <- predict(polinomial_model,TS)
   #matrice di confusione sui dati di test

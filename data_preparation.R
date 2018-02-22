@@ -30,7 +30,7 @@ data_preparation <- function(my_data){
   #my_data <- convert_LDA(my_data); 
   
   # 2)Tentativo LDA - Lo rende binario (se maggiore di 0.3, = 1 altrimenti 0)
-  my_data <- convert_LDA2(my_data);
+  #my_data <- convert_LDA2(my_data);
   
   
   return(my_data);

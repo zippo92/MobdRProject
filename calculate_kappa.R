@@ -3,7 +3,7 @@ calculate_kappa <- function(confusion_matrix){
   
   TS <- confusion_matrix["0", "0"] + confusion_matrix["0", "1"] +
     confusion_matrix["1", "0"] + confusion_matrix["1", "1"]
-  
+
   acc <- round((confusion_matrix["0","0"]+confusion_matrix["1","1"])/
                       TS,4)
   aexp <- round((confusion_matrix["0", "0"] + confusion_matrix["1", "0"]) * 

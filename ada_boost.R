@@ -1,16 +1,12 @@
-#TR=dati di training
-#YTR=classe dati di training
-#TS=dati di test
-#YTS=classe dati di test
-#questo classificatore si trova nel package e1071
-gaussian_SVM <- function(TR,YTR,TS,YTS){
-  set.seed(123)
-  #addestramento
-  gaussian_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="radial")
-  #predizione sui dati di test
-  test_prediction <- predict(gaussian_model,TS)
+ada_boost <- function(TR, TS, YTS){
+  set.seed(123);
+
+  ada_model<-ada(shares~. ,data=TR,iter=50,nu=1,type="discrete")
+  ##add testing data set
+  test_prediction <- predict(ada_model, data.frame(TS), decisionValues = TRUE)
   #matrice di confusione sui dati di test
-  confusion_matrix<-table(predicted=test_prediction,observation=YTS)
+  confusion_matrix<-table(predicted=test_prediction,
+                          observation=YTS)
   #nella matrice di confusione:
   #elemento [i,j] classe predetta i classe reale j
   accuracy <- round((confusion_matrix["0","0"]+confusion_matrix["1","1"])/
