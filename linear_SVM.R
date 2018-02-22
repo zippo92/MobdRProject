@@ -4,7 +4,6 @@
 #YTS=classe dati di test
 #questo classificatore si trova nel package LibLineaR
 linear_SVM <- function(TR,YTR,TS,YTS){
-  set.seed(123)
   #addestramento
   linear_model<-LiblineaR(data=TR,target=YTR,type=1,cost=1,bias=TRUE,verbose=FALSE) #
   #predizione sui dati di test

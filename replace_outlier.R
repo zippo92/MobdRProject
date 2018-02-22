@@ -1,5 +1,4 @@
 replace_outlier <- function(x){
-  set.seed(123)
   qnt <- quantile(x, c(0.25, 0.75), na.rm = TRUE)
   benchmark1 <- (qnt[1]-(qnt[2]-qnt[1])*1.5)
   benchmark2 <- (qnt[2]+(qnt[2]-qnt[1])*1.5)

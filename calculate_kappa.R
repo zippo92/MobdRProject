@@ -1,6 +1,4 @@
 calculate_kappa <- function(confusion_matrix){
-  set.seed(123);
-  
   TS <- confusion_matrix["0", "0"] + confusion_matrix["0", "1"] +
     confusion_matrix["1", "0"] + confusion_matrix["1", "1"]
 

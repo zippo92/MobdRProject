@@ -1,12 +1,12 @@
 ada_boost <- function(TR, TS, YTS){
-  set.seed(123);
 
-  ada_model<-ada(shares~. ,data=TR,iter=50,nu=1,type="discrete")
+  ada_model<-ada(shares~. ,data=TR,iter=70,nu=1,type="discrete")
   ##add testing data set
   test_prediction <- predict(ada_model, data.frame(TS), decisionValues = TRUE)
   #matrice di confusione sui dati di test
   confusion_matrix<-table(predicted=test_prediction,
                           observation=YTS)
+  print(confusion_matrix)
   #nella matrice di confusione:
   #elemento [i,j] classe predetta i classe reale j
   accuracy <- round((confusion_matrix["0","0"]+confusion_matrix["1","1"])/

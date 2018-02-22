@@ -2,7 +2,6 @@
 # e le altre per il training
 
 split <- function(my_data, K){
-  set.seed(123)
   nFoldSplit <- c(); 
   
   #Per avere lo stesso bilanciamento di istanze positive e negative, prendo la stessa percentuale in ogni split

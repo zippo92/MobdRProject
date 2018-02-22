@@ -28,6 +28,12 @@ data_understanding <- function(my_data){
   
   output <- list(aggregate_information,type_attribute,summary_attribute,outlier_list)
   names(output) <- c("aggregate_information","attribute class","summary_attribute","outlier_list")
+  
+  #weights2 <- random.forest.importance(shares~., my_data)
+  #print(weights2);
+  
+  #weights3 <- relief(shares~., fullSet);
+  
   return(output)
   
 }

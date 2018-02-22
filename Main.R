@@ -18,6 +18,7 @@ source("ada_boost.R")
 library("rpart")
 library("rpart.plot")
 library("ada")
+library("FSelector")
 
 n_fold <- 5
 
@@ -36,19 +37,19 @@ normalized_splitted_data2 <- list();
 normalized_splitted_data3 <- list();
 
 
-# for(i in 1:n_fold){
-#   normalized_splitted_data[[i]] <- data_normalization(splitted_data[[i]]);
-#   names(normalized_splitted_data)[i] <-paste("split_",i, sep="");
-# }
-# 
+for(i in 1:n_fold){
+  normalized_splitted_data[[i]] <- data_normalization(splitted_data[[i]]);
+  names(normalized_splitted_data)[i] <-paste("split_",i, sep="");
+}
+
 # for(i in 1:n_fold){
 #   normalized_splitted_data2[[i]] <- data_normalization2(splitted_data[[i]]);
 #   names(normalized_splitted_data2)[i] <-paste("split_",i, sep="");
 # }
 
-for(i in 1:n_fold){
-  normalized_splitted_data3[[i]] <- data_normalization3(splitted_data[[i]]);
-  names(normalized_splitted_data3)[i] <-paste("split_",i, sep="");
-}
+# for(i in 1:n_fold){
+#   normalized_splitted_data3[[i]] <- data_normalization3(splitted_data[[i]]);
+#   names(normalized_splitted_data3)[i] <-paste("split_",i, sep="");
+# }
 
-classification_parameters = choosing_classifier(normalized_splitted_data3);
+classification_parameters = choosing_classifier(normalized_splitted_data);

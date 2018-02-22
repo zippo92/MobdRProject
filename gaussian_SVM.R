@@ -4,7 +4,6 @@
 #YTS=classe dati di test
 #questo classificatore si trova nel package e1071
 gaussian_SVM <- function(TR,YTR,TS,YTS){
-  set.seed(123)
   #addestramento
   gaussian_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="radial")
   #predizione sui dati di test

@@ -2,9 +2,6 @@ source("replace_outlier.R");
 
 data_preparation <- function(my_data){
   
-  set.seed(123);
-  # source("replace_outliers.R")
-  
   # Rimozione dei duplicati
   my_data <- my_data[!duplicated(my_data),];
   
@@ -21,10 +18,13 @@ data_preparation <- function(my_data){
   my_data <- delete_non_stop(my_data);
   
   # Eliminiamo le keyword massime e minime (shares) e teniamo solo le medie
-  my_data <- delete_min_max_kw(my_data);
+  #my_data <- delete_min_max_kw(my_data);
   
   # Replace outliers
   my_data <- search_and_replace_outlier(my_data);
+  
+  # Eliminiamo la lunghezza del titolo, la global sentimental polarity e
+  my_data <- my_data[, -c(2, 37, 49)]
   
   # 1)Tentativo LDA - Lo rende binario (se maggiore di 0.3, = 1 altrimenti 0)
   #my_data <- convert_LDA(my_data); 
@@ -35,7 +35,6 @@ data_preparation <- function(my_data){
   
   return(my_data);
 }
-
 
 share_binary <- function(my_data){
   my_data$shares <- ifelse(my_data$shares > 1400, 1, 0);
