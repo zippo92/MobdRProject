@@ -1,4 +1,4 @@
-data_normalization3 <- function(my_data){
+nFold_normalization2 <- function(my_data){
   data_train <- my_data$train[,1:(ncol(my_data$train))]
   
   data_test <- my_data$test[,1:(ncol(my_data$test)-1)]

@@ -5,9 +5,9 @@ library("e1071")
 source("data_understanding.R")
 source("data_preparation.R")
 source("data_splitting_nFold.R")
+source("nFold_normalization.R")
+source("nFold_normalization2.R")
 source("data_normalization.R")
-source("data_normalization2.R")
-source("data_normalization3.R")
 source("choosing_classifier2.R")
 source("linear_SVM.R")
 source("gaussian_SVM.R")
@@ -20,36 +20,46 @@ library("rpart.plot")
 library("ada")
 library("FSelector")
 
+source("cross_validation.R")
+source("gaussian_model.R")
+source("gaussian_predict.R")
+
+
 n_fold <- 5
 
-fullSet <- read.csv("training_R.csv",row.names=1, sep=";")
+train_set <- read.csv("training_R.csv",row.names=1, sep=";")
 
-data_summary <- data_understanding(fullSet);
-cleaned_data <- data_preparation(fullSet);
-#data_summary <- data_understanding(my_data);
+############ INSERIRE IL TEST SET QUI ############ 
+# test_set <- ...;
 
-splitted_data <- split(cleaned_data,n_fold);
-#splitted_data contiene N split, ognuno diviso in train e test 
-#Ex: splitted_data$split_2$train
+data_summary <- data_understanding(train_set);
+cleaned_train <- data_preparation(train_set);
+cleaned_test <- data_preparation(test_set);
 
-normalized_splitted_data <- list();
-normalized_splitted_data2 <- list();
-normalized_splitted_data3 <- list();
+# classification_parameters <- cross_validation(cleaned_train, n_fold);
+
+normalized_data <- data_normalization(cleaned_train);
+normalized_test <- data_normalization(cleaned_test);
+
+best_model <- gaussian_model(normalized_data$scaled_data, normalized_data$label_data);
+predict_model <- gaussian_predict(best_model, normalized_test$scaled_data);
+
+confusion_matrix<-table(predicted=predict_model,observation=normalized_test$label_data);
+
+accuracy <- round((confusion_matrix["0","0"]+confusion_matrix["1","1"])/
+                    nrow(normalized_test$scaled_data),4)
+
+TPR_0 <- round(((confusion_matrix["0","0"])/(confusion_matrix["0","0"]+confusion_matrix["1","0"])),4)
+TPR_1 <- round(((confusion_matrix["1","1"])/(confusion_matrix["1","1"]+confusion_matrix["0","1"])),4)
+
+kappa <- calculate_kappa(confusion_matrix);
+
+output <- c(accuracy,TPR_0,TPR_1, kappa);
+names(output) <- c("Accuracy", "AVG_TPR_0", "AVG_TPR_1", "Kappa");
+View(t(output));
 
 
-for(i in 1:n_fold){
-  normalized_splitted_data[[i]] <- data_normalization(splitted_data[[i]]);
-  names(normalized_splitted_data)[i] <-paste("split_",i, sep="");
-}
 
-# for(i in 1:n_fold){
-#   normalized_splitted_data2[[i]] <- data_normalization2(splitted_data[[i]]);
-#   names(normalized_splitted_data2)[i] <-paste("split_",i, sep="");
-# }
 
-# for(i in 1:n_fold){
-#   normalized_splitted_data3[[i]] <- data_normalization3(splitted_data[[i]]);
-#   names(normalized_splitted_data3)[i] <-paste("split_",i, sep="");
-# }
 
-classification_parameters = choosing_classifier(normalized_splitted_data);
+

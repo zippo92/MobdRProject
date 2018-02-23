@@ -1,17 +1,13 @@
 data_normalization <- function(my_data){
-  data_train <- my_data$train[,1:(ncol(my_data$train)-1)]
-  label_train <- my_data$train[,ncol(my_data$train)]
-  
-  data_test <- my_data$test[,1:(ncol(my_data$test)-1)]
-  label_test <- my_data$test[,ncol(my_data$test)]
+  data <- my_data[,1:(ncol(my_data)-1)]
+  label <- my_data[,ncol(my_data)]
   
   #scaled_training <- scale(data_train,center = T,scale = T)
   #toNormalize consiste nelle colonne da normalizzare, escludendo i binari e LDA
   toNormalize <- c(1:9,16:27,29:47);
-  data_train[toNormalize] <- scale(data_train[toNormalize],center = T,scale = T)
-  data_test[toNormalize] <- scale(data_test[toNormalize],center = T,scale = T)
-  
-  output <- list(data_train,label_train,data_test,label_test)
-  names(output) <- c("scaled_training","label_train","scaled_test","label_test")
+  data[toNormalize] <- scale(data[toNormalize],center = T,scale = T)
+
+  output <- list(data,label)
+  names(output) <- c("scaled_data","label_data")
   return(output)
 }
