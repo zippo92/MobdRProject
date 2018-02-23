@@ -5,7 +5,7 @@ split <- function(my_data, K){
   nFoldSplit <- c(); 
   
   #Per avere lo stesso bilanciamento di istanze positive e negative, prendo la stessa percentuale in ogni split
-  output <- by(my_data, as.factor(cleaned_data$shares),function(x){
+  output <- by(my_data, as.factor(cleaned_train$shares),function(x){
   smp_size <- floor(nrow(x)/K);
   print(smp_size)
   splitted_data <- list(); 

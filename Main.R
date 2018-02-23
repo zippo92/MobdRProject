@@ -25,7 +25,7 @@ source("gaussian_model.R")
 source("gaussian_predict.R")
 
 
-n_fold <- 1
+n_fold <- 2
 
 train_set <- read.csv("training_R.csv",row.names=1, sep=";")
 
