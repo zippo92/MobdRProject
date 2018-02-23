@@ -1,26 +1,26 @@
 choosing_classifier <- function(splits){
-  n_classifiers <- 1:1;
+  n_classifiers <- 1:3;
   n_fold <- length(splits);
   
   classification_parameters <- lapply(n_classifiers, function(x)matrix(0, nrow = n_fold, ncol = 4));
-  names(classification_parameters) <- c("Gaussian_SVM");
+  names(classification_parameters) <- c("Linear_SVM", "Gaussian_SVM", "Polinomial_SVM");
 
   for(i in 1:n_fold){
    
-    # classification_parameters$Linear_SVM[i,] <- linear_SVM(splits[[i]]$scaled_training,
-    #                                             splits[[i]]$label_train,
-    #                                             splits[[i]]$scaled_test,
-    #                                             splits[[i]]$label_test);
+    classification_parameters$Linear_SVM[i,] <- linear_SVM(splits[[i]]$scaled_training,
+                                                splits[[i]]$label_train,
+                                                splits[[i]]$scaled_test,
+                                                splits[[i]]$label_test);
     
     classification_parameters$Gaussian_SVM[i,] <- gaussian_SVM(splits[[i]]$scaled_training,
                                                            splits[[i]]$label_train,
                                                            splits[[i]]$scaled_test,
                                                            splits[[i]]$label_test);
 
-    # classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
-    #                                                        splits[[i]]$label_train,
-    #                                                        splits[[i]]$scaled_test,
-    #                                                        splits[[i]]$label_test);
+    classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
+                                                           splits[[i]]$label_train,
+                                                           splits[[i]]$scaled_test,
+                                                           splits[[i]]$label_test);
 
     # Decision Tree
     # classification_parameters$Decision_Tree[i,] <- decision_tree(splits[[i]]$scaled_training,
