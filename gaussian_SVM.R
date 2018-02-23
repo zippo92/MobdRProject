@@ -5,7 +5,7 @@
 #questo classificatore si trova nel package e1071
 gaussian_SVM <- function(TR,YTR,TS,YTS){
   #addestramento
-  gaussian_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="radial")
+  gaussian_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="radial", cost=0.001, gamma=0.001)
   #predizione sui dati di test
   test_prediction <- predict(gaussian_model,TS)
   #matrice di confusione sui dati di test
