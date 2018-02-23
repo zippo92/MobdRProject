@@ -6,7 +6,6 @@ ada_boost <- function(TR, TS, YTS){
   #matrice di confusione sui dati di test
   confusion_matrix<-table(predicted=test_prediction,
                           observation=YTS)
-  print(confusion_matrix)
   #nella matrice di confusione:
   #elemento [i,j] classe predetta i classe reale j
   accuracy <- round((confusion_matrix["0","0"]+confusion_matrix["1","1"])/
