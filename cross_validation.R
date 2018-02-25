@@ -3,6 +3,8 @@ cross_validation <- function(cleaned_data, n_fold){
   #splitted_data contiene N split, ognuno diviso in train e test 
   #Ex: splitted_data$split_2$train
   
+  #Due liste diverse semplicemente perchè alcuni classificatori vogliono le label nello stesso dataframe
+  #ed altri vogliono due strutture separate
   normalized_splitted_data <- list();
   normalized_splitted_data2 <- list();
   

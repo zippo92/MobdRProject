@@ -36,13 +36,18 @@ data_summary <- data_understanding(train_set);
 cleaned_train <- data_preparation(train_set);
 cleaned_test <- data_preparation(test_set);
 
+# serve ad effettuare la cross validation con tutti i classificatori. Attenzione: durata elevata!
 # classification_parameters <- cross_validation(cleaned_train, n_fold);
 # View(classification_parameters);
 
+#Normalizzazione del training e del test
 normalized_data <- data_normalization(cleaned_train);
 normalized_test <- data_normalization(cleaned_test);
 
+#Training del modello svm con kernel gaussiano
 best_model <- gaussian_model(normalized_data$scaled_data, normalized_data$label_data);
+
+#Predict del test
 predict_model <- gaussian_predict(best_model, normalized_test$scaled_data);
 
 confusion_matrix<-table(predicted=predict_model,observation=normalized_test$label_data);
