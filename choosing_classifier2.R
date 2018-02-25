@@ -21,13 +21,7 @@ choosing_classifier <- function(splits, splits2){
                                                            splits[[i]]$scaled_test,
                                                            splits[[i]]$label_test);
 
-    # Polonomial Kernel
-    classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
-                                                           splits[[i]]$label_train,
-                                                           splits[[i]]$scaled_test,
-                                                           splits[[i]]$label_test);
-
-    # Polonomial Kernel
+    # Polinomial Kernel
     classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
                                                            splits[[i]]$label_train,
                                                            splits[[i]]$scaled_test,
