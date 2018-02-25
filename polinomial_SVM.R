@@ -5,7 +5,7 @@
 #questo classificatore si trova nel package e1071
 polinomial_SVM <- function(TR,YTR,TS,YTS){
   #addestramento
-  polinomial_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="polynomial",cost=0.01) #
+  polinomial_model<-svm(x=TR,y=YTR,scale=F,type="C-classification",kernel="polynomial") #
   #predizione sui dati di test
   test_prediction <- predict(polinomial_model,TS)
   #matrice di confusione sui dati di test

@@ -4,7 +4,7 @@ choosing_classifier <- function(splits, splits2){
   
   classification_parameters <- lapply(n_classifiers, function(x)matrix(0, nrow = n_fold, ncol = 4));
   #names(classification_parameters) <- c("Linear_SVM", "Gaussian_SVM", "Polinomial_SVM", "Decision_Tree", "Ada_Boost");
-  names(classification_parameters) <- c("Gaussian_SVM");
+  names(classification_parameters) <- c("Polinomial_SVM");
   
   
   for(i in 1:n_fold){
@@ -16,16 +16,16 @@ choosing_classifier <- function(splits, splits2){
     #                                             splits[[i]]$label_test);
     
     # Gaussian Kernel
-    classification_parameters$Gaussian_SVM[i,] <- gaussian_SVM(splits[[i]]$scaled_training,
-                                                           splits[[i]]$label_train,
-                                                           splits[[i]]$scaled_test,
-                                                           splits[[i]]$label_test);
-
-    # Polonomial Kernel
-    # classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
+    # classification_parameters$Gaussian_SVM[i,] <- gaussian_SVM(splits[[i]]$scaled_training,
     #                                                        splits[[i]]$label_train,
     #                                                        splits[[i]]$scaled_test,
     #                                                        splits[[i]]$label_test);
+
+    # Polonomial Kernel
+    classification_parameters$Polinomial_SVM[i,] <- polinomial_SVM(splits[[i]]$scaled_training,
+                                                           splits[[i]]$label_train,
+                                                           splits[[i]]$scaled_test,
+                                                           splits[[i]]$label_test);
 
     # Decision Tree
     # classification_parameters$Decision_Tree[i,] <- decision_tree(splits2[[i]]$scaled_training,

@@ -74,7 +74,7 @@ convert_LDA <- function(my_data){
   return(my_data);
 }
 
-pippo <- function(data)
+conv <- function(data)
 {
   strongest <- which.max(data) 
   vec = vector(,5);
@@ -96,6 +96,6 @@ pippo <- function(data)
 
 convert_LDA2 <- function(my_data){
  
-  my_data[,24:28] <- t(apply(my_data[,24:28],1,pippo));
+  my_data[,24:28] <- t(apply(my_data[,24:28],1,conv));
   return(my_data);
 }
